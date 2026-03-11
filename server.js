@@ -8,12 +8,23 @@ dotenv.config();
 
 const app = express();
 
+// Middleware
 app.use(express.json());
 
+// Connect Database
 connectDB();
 
+// Root route (important for Render)
+app.get("/", (req, res) => {
+  res.send("Hospital Management Backend API Running 🚀");
+});
+
+// Patient Routes
 app.use("/patients", patientRoutes);
 
-app.listen(process.env.PORT, () => {
-  console.log("Server running on port " + process.env.PORT);
+// Port
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log("Server running on port " + PORT);
 });
